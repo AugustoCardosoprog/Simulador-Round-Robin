@@ -27,7 +27,7 @@ void mostrarLista(struct Proceso proc[],int tamanio){
     return ((float)suma / tamanio);
 }
 
-float tiempoServicioPromedio(struct Proceso proc[],struct Proceso copia[],int tamanio){
+float tiempoEsperaPromedio(struct Proceso proc[],struct Proceso copia[],int tamanio){
     int suma=0;
     for (int i = 0; i < tamanio; i++)
     {
@@ -79,10 +79,10 @@ int main(int argc, char const *argv[])
 
     mostrarLista(procesos,TAMANIO);
 
-    while (sumaTiempoServicio>0)
-    {
-        for (int i = 0; i < TAMANIO; i++)
-        {
+    while (sumaTiempoServicio>0){
+
+        for (int i = 0; i < TAMANIO; i++){
+
             if (procesos[i].ts>0){
                 if (procesos[i].pid != nPAnt && nPAnt != -1)
                 {
@@ -100,11 +100,11 @@ int main(int argc, char const *argv[])
                     procesos[i].ts -= quantum;
                     sumaTiempoServicio -= quantum;
                     reloj += quantum;
-                }else{
+                }else{ //TS menor que el quantum
                     if(procesos[i].pid != nPAnt){
                         printf("{Call a Scheduler de Corto plazo para que inserte el proceso}\n");
                     }
-
+                    //finaliza
                     printf("{Ejecutando proceso %d por %d unidades de tiempo}\n",procesos[i].pid,procesos[i].ts);
                     reloj += procesos[i].ts;
                     procesos[i].tiempoRetorno=reloj;
@@ -124,7 +124,7 @@ int main(int argc, char const *argv[])
     
     printf("Reloj: %d \n",reloj);
     printf("Tiempo de retorno promedio: %f \n",tiempoRetornoPromedio(procesos,TAMANIO));
-    printf("Tiempo de servicio promedio: %f \n",tiempoServicioPromedio(procesos,copiaProcesos,TAMANIO));
+    printf("Tiempo de espera promedio: %f \n",tiempoEsperaPromedio(procesos,copiaProcesos,TAMANIO));
     
     return 0;
 }
