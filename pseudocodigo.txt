@@ -1,0 +1,52 @@
+- Se tiene una lista L de procesos, que tiene un Process ID (PID), y un Tiempo de servicio requerido (TS).
+(L es una tabla con dos columnas: PID y TS)
+Q = 4
+Ti = Q / 4 = 1
+R = 0 // este es el reloj
+
+While (la sumatoria de TS de la lista L sea mayor a cero)
+
+    For i = 1 To [cantidad de elementos en lista L]
+
+    //If L(i).TS es mayor de 0
+
+        si el proceso actual L(i) es distinto a Pant
+            y si Pant <> vacio
+            {Call a Scheduler de Corto plazo para que quite proceso}
+            R = R + Ti/2
+        end si
+
+    If L(i).TS > Q Entonces:
+
+        si el proceso actual L(i) es distinto a Pant
+            {Call a Scheduler de Corto plazo para que inserte el proceso}
+            R = R + Ti/2
+        end si
+
+        {Ejecutar Proceso L(i).PID por "Q" tiempo}
+        L(i).TS = L(i).TS - Q
+        R = R + Q
+     Sino:
+
+        si el proceso actual L(i) es distinto a Pant
+        {Call a Scheduler de Corto plazo para que inserte el proceso}
+        R = R + Ti/2
+        end si
+
+        {Ejecutar Proceso L(i).PID por "L(i).TS" tiempo}
+        R = R + L(i).TS 
+        L(i).TS = 0
+    Fin Si
+    { Mostrar por pantalla L(i) y R }
+    Guardar en una lista nueva N un registro que tenga L(i) y R
+
+    Fin Si
+
+    Fin For
+
+Fin While
+
+Con la lista N calcular e imprimir el tiempo de retorno y tiempo de espera promedio.
+
+
+...
