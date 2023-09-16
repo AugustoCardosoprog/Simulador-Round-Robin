@@ -39,8 +39,8 @@ float tiempoServicioPromedio(struct Proceso proc[],struct Proceso copia[],int ta
 
 int main(int argc, char const *argv[])
 {
-    struct Proceso procesos[10];
-    int tamanio = sizeof(procesos) / sizeof(procesos[0]);
+    const int TAMANIO = 10;
+    struct Proceso procesos [TAMANIO];
     
     //Hardcodeo de tiempo de servicio requerido de los procesos
     procesos[0].ts = 10;
@@ -61,7 +61,7 @@ int main(int argc, char const *argv[])
     int nPAnt=-1;
 
     int sumaTiempoServicio=0;
-    for (int i = 0; i < tamanio; i++)
+    for (int i = 0; i < TAMANIO; i++)
     {
         sumaTiempoServicio += procesos[i].ts;
         procesos[i].pid = i;//le pongo el id
@@ -69,19 +69,19 @@ int main(int argc, char const *argv[])
     }
 
     //copia de procesos
-    struct Proceso copiaProcesos[10];
-    for (int i = 0; i < tamanio; i++) {
+    struct Proceso copiaProcesos [TAMANIO];
+    for (int i = 0; i < TAMANIO; i++) {
         copiaProcesos[i].pid = procesos[i].pid;
         copiaProcesos[i].ts = procesos[i].ts;
         copiaProcesos[i].tiempoRetorno = procesos[i].tiempoRetorno;
     }
 
 
-    mostrarLista(procesos,tamanio);
+    mostrarLista(procesos,TAMANIO);
 
     while (sumaTiempoServicio>0)
     {
-        for (int i = 0; i < tamanio; i++)
+        for (int i = 0; i < TAMANIO; i++)
         {
             if (procesos[i].ts>0){
                 if (procesos[i].pid != nPAnt && nPAnt != -1)
@@ -118,13 +118,13 @@ int main(int argc, char const *argv[])
 
             }
         }
-        mostrarLista(procesos,tamanio);
+        mostrarLista(procesos,TAMANIO);
         
     }
     
     printf("Reloj: %d \n",reloj);
-    printf("Tiempo de retorno promedio: %f \n",tiempoRetornoPromedio(procesos,tamanio));
-    printf("Tiempo de servicio promedio: %f \n",tiempoServicioPromedio(procesos,copiaProcesos,tamanio));
+    printf("Tiempo de retorno promedio: %f \n",tiempoRetornoPromedio(procesos,TAMANIO));
+    printf("Tiempo de servicio promedio: %f \n",tiempoServicioPromedio(procesos,copiaProcesos,TAMANIO));
     
     return 0;
 }
